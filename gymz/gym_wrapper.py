@@ -45,6 +45,15 @@ class GymWrapper(WrapperBase):
         self._monitor = config['Env']['monitor']
         if self._monitor:
             self._monitor_dir = os.path.join(config['All']['prefix'], config['Env']['monitor_dir'])
+            
+        # Check whether additional imports due to user defined environments are
+        # necessary
+        
+        if 'user_defined' in config['Env']:
+            logger.warn("Using user defined environment {}"\
+                        .format(['Env']['user_defined']))
+            
+            exec('import ' + ['Env']['user_defined'])
 
         # set environment parameters
 
