@@ -132,7 +132,10 @@ class GymWrapper(WrapperBase):
         if isinstance(self._env.action_space, gym.spaces.Discrete):
             action = self._command_buffer[0][0]['value']
         else:
-            action = [self._command_buffer[0][0]['value']]
+            if isinstance(self._command_buffer[0][0], dict):
+                action = [self._command_buffer[0][0]['value']]
+            else:
+                action = self._command_buffer[0]
 
         self._output, self._reward, self._done_buffer[0], _ = self._env.step(action)
 
