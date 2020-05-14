@@ -51,9 +51,9 @@ class GymWrapper(WrapperBase):
         
         if 'user_defined' in config['Env']:
             logger.warn("Using user defined environment {}"\
-                        .format(['Env']['user_defined']))
+                        .format(config['Env']['user_defined']))
             
-            exec('import ' + ['Env']['user_defined'])
+            exec('import ' + config['Env']['user_defined'])
 
         # set environment parameters
 
