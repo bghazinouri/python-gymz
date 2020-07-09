@@ -19,6 +19,9 @@ class GymWrapper(WrapperBase):
     """Wrapper for the OpenAI Gym toolkit"""
 
     def __init__(self, config):
+        
+        self.runtime = 0.0
+        
         WrapperBase.__init__(self)
 
         self._initial_reward = config['Env']['initial_reward']
@@ -135,7 +138,12 @@ class GymWrapper(WrapperBase):
             if isinstance(self._command_buffer[0][0], dict):
                 action = [self._command_buffer[0][0]['value']]
             else:
-                action = self._command_buffer[0]
+                print('the command buffer is: ', self._command_buffer[0][-1])
+                # time.sleep(2)
+                # while self.runtime == self._command_buffer[0][-1]:
+                #     pass
+                self.runtime = self._command_buffer[0][-1]
+                action = self._command_buffer[0][0:-1]
 
         self._output, self._reward, self._done_buffer[0], _ = self._env.step(action)
 
