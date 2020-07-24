@@ -12,8 +12,8 @@
     "Env":
     {
         "env": "MountainCar-v0",
-        "initial_reward": null,
-        "final_reward": null,
+        "initial_reward": -1,
+        "final_reward": -1,
         "final_reward_null": null,
         "min_reward": -1.0,
         "max_reward": 1.0,
@@ -25,22 +25,22 @@
     },
     "EnvRunner":
     {
-        "update_interval": 0.02,
+        "update_interval": 0.002,
         "inter_trial_duration": 0.4
     },
     "CommandReceiver":
     {
         "socket": 5555,
-        "time_stamp_tolerance": 0.01
+        "time_stamp_tolerance": 0.001
     },
     "ObservationSender":
     {
         "socket": 5556,
-        "update_interval": 0.01
+        "update_interval": 0.001
     },
     "RewardSender":
     {
         "socket": 5557,
-        "update_interval": 0.01
+        "update_interval": 0.001
     }
 }
