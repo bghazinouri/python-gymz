@@ -143,7 +143,7 @@ class GymWrapper(WrapperBase):
                 # while self.runtime == self._command_buffer[0][-1]:
                 #     pass
                 self.runtime = self._command_buffer[0][-1]
-                action = self._command_buffer[0][0:-1]
+                action = self._command_buffer[0]#[0:-1]
 
         self._output, self._reward, self._done_buffer[0], _ = self._env.step(action)
 
