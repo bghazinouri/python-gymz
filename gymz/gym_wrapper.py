@@ -48,7 +48,7 @@ class GymWrapper(WrapperBase):
         self._monitor = config['Env']['monitor']
         if self._monitor:
             self._monitor_dir = os.path.join(config['All']['prefix'], config['Env']['monitor_dir'])
-            
+        self.last_print = 0
         # Check whether additional imports due to user defined environments are
         # necessary
         
@@ -138,13 +138,16 @@ class GymWrapper(WrapperBase):
             if isinstance(self._command_buffer[0][0], dict):
                 action = [self._command_buffer[0][0]['value']]
             else:
-                print('the command buffer is: ', self._command_buffer[0][-1])
+                _command_buffer = self._command_buffer[0][-1]
                 # time.sleep(2)
                 # while self.runtime == self._command_buffer[0][-1]:
                 #     pass
                 self.runtime = self._command_buffer[0][-1]
                 action = self._command_buffer[0]#[0:-1]
-
+                if _command_buffer>= self.last_print:
+                    print('the command buffer is: ', int(_command_buffer))
+                    self.last_print +=1
+                
         self._output, self._reward, self._done_buffer[0], _ = self._env.step(action)
 
         # record Gym output depending on type of observation space
