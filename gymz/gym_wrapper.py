@@ -149,7 +149,7 @@ class GymWrapper(WrapperBase):
                     self.last_print +=1
                 
         self._output, self._reward, self._done_buffer[0], _ = self._env.step(action)
-
+        
         # record Gym output depending on type of observation space
         if isinstance(self._env.observation_space, gym.spaces.Discrete):
             self._episode_observation.append(self._output)
@@ -182,7 +182,6 @@ class GymWrapper(WrapperBase):
             self._output_buffer[0] = messages.to_message(self._env.observation_space.low, self._env.observation_space.high, self._output)
         else:
             raise NotImplementedError('Observation space {obs} not supported.'.format(obs=self._env.observation_space))
-
     def get_command_buffer(self):
         if self._command_buffer is None:
             # set up buffer depending on type of action space
@@ -192,7 +191,6 @@ class GymWrapper(WrapperBase):
                 self._command_buffer = [messages.to_message(self._env.action_space.low[0], self._env.action_space.high[0], 0.)]
             else:
                 raise NotImplementedError('Action space {acts} not supported.'.format(acts=self._env.action_space))
-
         return self._command_buffer
 
     def get_output_buffer(self):
@@ -219,6 +217,6 @@ class GymWrapper(WrapperBase):
             self._episode: {
                 'reward': self._episode_reward,
                 'obervation': self._episode_observation,
-                'duration': time.time() - self._episode_time_start
+                'duration': time.time() - self._episode_time_start,
             }
         }
